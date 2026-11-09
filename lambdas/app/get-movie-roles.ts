@@ -23,9 +23,10 @@ export const handler = async (
   }
 
   const actorId = parseId(event.queryStringParameters?.actor);
-  if (actorId === undefined) {
+  if (event.queryStringParameters?.actor !== undefined && actorId === undefined) {
     return response(400, { message: "actorID must be a positive integer" });
   }
+
 
   try {
 
