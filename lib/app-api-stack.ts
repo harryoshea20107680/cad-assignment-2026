@@ -94,7 +94,7 @@ export class AppApiStack extends cdk.Stack {
     };
     // Routes
     const moviesResource = api.root.addResource('movies');
-    moviesResource.addResource('roles').addMethod('POST', new apig.LambdaIntegration(addMovieRoleFn));
+    moviesResource.addResource('roles').addMethod('POST', new apig.LambdaIntegration(addMovieRoleFn), {apiKeyRequired: true});
 
     const movieRolesResource = moviesResource.addResource('{movieID}').addResource('roles');
     movieRolesResource.addMethod('GET', new apig.LambdaIntegration(getMovieRolesFn), userAuth);
@@ -103,5 +103,13 @@ export class AppApiStack extends cdk.Stack {
       .addResource('actors')
       .addResource('{actorID}')
       .addMethod('GET', new apig.LambdaIntegration(getActorFn), userAuth);
+
+    const adminApiKey = api.addApiKey('AdminApiKey');
+
+    const adminUsagePlan = api.addUsagePlan('AdminUsagePlan');
+
+    adminUsagePlan.addApiKey(adminApiKey);
+
+    adminUsagePlan.addApiStage({stage: api.deploymentStage,});
   }
 }
