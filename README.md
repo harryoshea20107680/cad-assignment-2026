@@ -1,5 +1,36 @@
 ## Cloud App Development - Assignment.
+## Harry O'Shea 20107680
 
+This assignment implements a serverless Movie and Actor REST API using
+TypeScript and AWS CDK.
+
+### AWS Services
+- AWS Lambda for Backend functions
+- API Gateway REST endpoints and administrator API key
+- DynamoDB as a Single-table database
+- Amazon Cognito for user authentication
+- CloudWatch for Request logging
+
+### Implemented Endpoints
+- GET /movies/{movieID}/roles
+- GET /movies/{movieID}/roles?actor={actorID}
+- GET /actors/{actorID}
+- GET /actors/{actorID}?movie={movieID}
+- POST /movies/roles
+
+### Authentication
+- GET requests require a Cognito authentication cookie.
+- POST requests require an administrator API key.
+
+### Deployment
+The application uses two AWS CDK stacks:
+- CognitoStack
+- AppApiStack
+
+### Demo video:
+https://youtu.be/YWQj9kan70Q
+
+## Assignment Spec:
 This repository contains an implementation of the serverless web API specified below, and the CDK code to provision its infrastructure for the AWS cloud. However, it is incomplete as there are bugs and missing features.
 
 __Objective:__ Demonstrate your knowledge of serverless Web API design and deployment by completing the implementation.
